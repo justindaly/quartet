@@ -6,5 +6,5 @@ from django.db import models
 # Create your models here.
 class Metric(models.Model):
     timestamp = models.BigIntegerField()
-    metric = models.CharField(max_length=200)
+    name = models.CharField(max_length=200)
     value = models.IntegerField()

@@ -18,7 +18,10 @@ from django.contrib import admin
 from metrics import views as metric_views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
     # api
-    url(r'^metrics$', metric_views.metric_collection)
+    url(r'^metrics$', metric_views.metric_collection),
+    url(r'^metrics/range/(?P<t1>\d+)/(?P<t2>\d+)/(?P<name>\w+)$',
+        metric_views.metric_range),
+    url(r'^metrics/timestamp-metric/(?P<timestamp>\d+)/(?P<name>\w+)$',
+        metric_views.timestamp_metric),
 ]

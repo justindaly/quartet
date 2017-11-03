@@ -2,9 +2,15 @@
 metrics box challenge
 
 in this challenge i created the three endpoints called
-### /metrics [POST/GET]
-### /metrics/aggregate/<timestamp1>/<timestamp2>/<metric_name>
-### /metrics/timestamp-metric/<timestamp>/<metric_name>
+```
+/metrics [POST/GET]
+```
+```
+/metrics/aggregate/<timestamp1>/<timestamp2>/<metric_name> [GET]
+```
+```
+/metrics/timestamp-metric/<timestamp>/<metric_name> [GET]
+```
 
 i decided to use django and the django rest framework because they provided out-of-the-box ease of, from ease of database and model setup including testing of the rest endpoints for verification
 

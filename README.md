@@ -12,7 +12,7 @@ in this challenge i created the three endpoints called
 /metrics/timestamp-metric/<timestamp>/<metric_name> [GET]
 ```
 
-i decided to use django and the django rest framework because they provided out-of-the-box ease of, from ease of database and model setup including testing of the rest endpoints for verification
+i decided to use django and the django rest framework because they provided out-of-the-box ease of database and model setup, including testing of the rest endpoints for verification
 
 ## installation & running:
 > first created runtime enviroment by installing and using python 2.7 virtualenvwrapper:
@@ -31,7 +31,21 @@ $ python manage.py migrate
 $ python manage.py runserver
 ```
 
-> to execute the sample test cases, in another terminal from the same directory
+> to execute the sample test cases
 ```
 $ python manage.py test
+```
+
+> to manually run sample queries against the rest api, use curl
+```
+curl -H "Content-Type: application/json" -X POST "http://localhost:8000/metrics" -d "{\"timestamp\":5,\"name\":\"response_time\",\"value\":1}"
+```
+```
+curl -H "Content-Type: application/json" -X GET "http://localhost:8000/metrics"
+```
+```
+curl -H "Content-Type: application/json" -X GET "http://localhost:8000/metrics/timestamp-metric/5/response_time"
+```
+```
+curl -H "Content-Type: application/json" -X GET "http://localhost:8000/metrics/aggregate/4/6/response_time"
 ```

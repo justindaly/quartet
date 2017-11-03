@@ -17,7 +17,7 @@ i decided to use django and the django rest framework because they provided out-
 ## installation & running:
 > first created runtime enviroment by installing and using python 2.7 virtualenvwrapper:
 ```
-$ mkvirtualenv -r requirements.pip -p python2.7 poc_env
+$ mkvirtualenv -r requirements.pip -p python2.7 quartet_env
 ```
 
 > setup django db

@@ -9,6 +9,7 @@ from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from metrics.models import Metric
 from metrics.serializers import MetricSerializer
+import numpy as np
 
 # Create your views here.
 
@@ -29,11 +30,31 @@ def metric_collection(request):
 
 @csrf_exempt
 #@api_view(['GET', 'POST'])
-def metric_range(request, t1, t2, name):
+def metric_aggregate(request, t1, t2, name):
     if request.method == 'GET':
         metrics = Metric.objects.filter(timestamp__gte=t1,timestamp__lte=t2,name=name)
-        serializer = MetricSerializer(metrics, many=True)
-        return JsonResponse(serializer.data, safe=False)
+
+        if len(metrics) == 0:
+            return JsonResponse("range not found", safe=False)
+
+        metric_values = []
+        for metric in metrics:
+            metric_values.append(metric.value)
+
+        a = np.array(metric_values)
+        p50 = np.percentile(a, 50)
+        p75 = np.percentile(a, 75)
+        p90 = np.percentile(a, 90)
+        p95 = np.percentile(a, 95)
+
+        data = { 'name': metric.name,
+                 'percentiles': 
+                 { 'percentile_50': p50,
+                   'percentile_75': p75,
+                   'percentile_90': p90,
+                   'percentile_95': p95 }}
+
+        return JsonResponse(data, safe=False)
 
 @csrf_exempt
 #@api_view(['GET', 'POST'])
